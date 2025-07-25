@@ -286,3 +286,32 @@ document.addEventListener("keydown", function (e) {
     alert("Inspecting is disabled!");
   }
 });
+
+
+// PWA Install
+let deferredPrompt;
+const installBtn = document.createElement("button");
+installBtn.textContent = "Install App";
+installBtn.className = "fixed bottom-24 right-6 z-50 px-4 py-2 bg-green-600 text-white rounded shadow-lg hover:bg-green-700";
+installBtn.style.display = "none";
+document.body.appendChild(installBtn);
+
+// Listen for the install prompt
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.style.display = "block";
+});
+
+// On button click, show the prompt
+installBtn.addEventListener("click", async () => {
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    const { outcome } = await deferredPrompt.userChoice;
+    if (outcome === "accepted") {
+      console.log("User accepted the install prompt");
+    }
+    deferredPrompt = null;
+    installBtn.style.display = "none";
+  }
+});
