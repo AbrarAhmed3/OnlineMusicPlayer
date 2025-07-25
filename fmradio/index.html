@@ -6,22 +6,49 @@
     <title>Indian Radio · Advanced Player</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#22c55e" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+
+    <!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B3DRML41RS');
+</script>
+
   </head>
   <body class="bg-black text-white min-h-screen w-full flex flex-col">
-
     <!-- Sidebar: Only visible on md+ (desktop/tablet) -->
-    <aside class="hidden md:fixed md:top-0 md:left-0 md:z-30 md:h-screen md:w-60 bg-neutral-900 border-r border-neutral-800 flex-col py-6 px-4 md:flex">
+    <aside
+      class="hidden md:fixed md:top-0 md:left-0 md:z-30 md:h-screen md:w-60 bg-neutral-900 border-r border-neutral-800 flex-col py-6 px-4 md:flex"
+    >
       <div class="mb-8 flex items-center">
-        <svg class="w-8 h-8 text-green-500 mr-2" fill="currentColor" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="10" />
-        </svg>
-        <span class="text-white font-bold text-2xl tracking-wide">Indian Radio</span>
+        <img
+          src="icons/icon-192.png"
+          alt="Indian Radio Logo"
+          class="w-10 h-10 mr-2 rounded"
+        />
+
+        <span class="text-white font-bold text-2xl tracking-wide"
+          >Indian Radio</span
+        >
       </div>
       <nav class="mt-2 flex flex-col gap-2">
-        <button id="allStationsTab" class="px-4 py-2 rounded active-nav font-semibold transition">
+        <button
+          id="allStationsTab"
+          class="px-4 py-2 rounded active-nav font-semibold transition"
+        >
           All Stations
         </button>
-        <button id="favoritesTab" class="px-4 py-2 rounded text-white hover:bg-green-700">
+        <button
+          id="favoritesTab"
+          class="px-4 py-2 rounded text-white hover:bg-green-700"
+        >
           My Stations
         </button>
       </nav>
@@ -29,22 +56,30 @@
         Favorites saved on your device<br />
         <span class="text-neutral-600">
           Powered by
-          <a href="https://www.radio-browser.info/" target="_blank" class="text-green-400 hover:underline">Radio Browser</a>
+          <a
+            href="https://www.radio-browser.info/"
+            target="_blank"
+            class="text-green-400 hover:underline"
+            >Radio Browser</a
+          >
         </span>
       </div>
     </aside>
 
     <!-- Main app layout -->
     <main class="flex-1 flex flex-col min-w-0 h-full md:ml-60">
-
       <!-- Top Bar: visible on mobile, hidden on desktop -->
-      <header class="flex md:hidden items-center justify-between px-4 py-3 bg-neutral-900 border-b border-neutral-800">
+      <header
+        class="flex md:hidden items-center justify-between px-4 py-3 bg-neutral-900 border-b border-neutral-800"
+      >
         <span class="text-xl font-bold">Indian Radio</span>
         <!-- You can add a menu/hamburger here if needed -->
       </header>
 
       <!-- Search Bar -->
-      <div class="flex items-center gap-2 px-4 pt-4 pb-2 md:px-5 md:pt-8 md:pb-3">
+      <div
+        class="flex items-center gap-2 px-4 pt-4 pb-2 md:px-5 md:pt-8 md:pb-3"
+      >
         <input
           id="searchInput"
           type="search"
@@ -52,7 +87,13 @@
           autocomplete="off"
           class="flex-1 h-12 px-5 rounded-full bg-neutral-800 border-none text-white text-lg placeholder-neutral-400 focus:outline-none focus:ring-2 focus:ring-green-400"
         />
-        <svg class="w-7 h-7 text-green-400 mr-3 -ml-10 pointer-events-none" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <svg
+          class="w-7 h-7 text-green-400 mr-3 -ml-10 pointer-events-none"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
           <circle cx="11" cy="11" r="8" />
           <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
@@ -60,42 +101,102 @@
 
       <!-- Panels -->
       <section class="flex-1 overflow-y-auto pb-32 scrollbar-thin">
-        <div id="stationsPanel" class="max-w-6xl mx-auto pt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-        <div id="favoritesPanel" class="hidden max-w-6xl mx-auto pt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <div
+          id="stationsPanel"
+          class="max-w-6xl mx-auto pt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        ></div>
+        <div
+          id="favoritesPanel"
+          class="hidden max-w-6xl mx-auto pt-2 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+        ></div>
       </section>
     </main>
 
     <!-- Now playing bar (player controls, always at bottom) -->
-    <footer class="fixed left-0 md:left-60 bottom-0 right-0 h-20 bg-gradient-to-r from-neutral-950 to-black border-t border-neutral-800 flex items-center px-4 md:px-7 z-50">
-      <span id="nowPlayingLogo" class="flex justify-center items-center h-14 w-14 rounded-md bg-neutral-800 text-xl mr-4 overflow-hidden"></span>
+    <footer
+      class="fixed left-0 md:left-60 bottom-0 right-0 h-20 bg-gradient-to-r from-neutral-950 to-black border-t border-neutral-800 flex items-center px-4 md:px-7 z-50"
+    >
+      <span
+        id="nowPlayingLogo"
+        class="flex justify-center items-center h-14 w-14 rounded-md bg-neutral-800 text-xl mr-4 overflow-hidden"
+      ></span>
       <div class="flex flex-col justify-center min-w-0 flex-1">
         <div class="flex items-center gap-3">
-          <span id="nowPlayingName" class="text-white font-semibold text-lg truncate leading-tight">No Station Playing</span>
-          <span id="playingIndicator" class="hidden ml-2 h-3 w-3 bg-green-500 rounded-full pulse-dot"></span>
+          <span
+            id="nowPlayingName"
+            class="text-white font-semibold text-lg truncate leading-tight"
+            >No Station Playing</span
+          >
+          <span
+            id="playingIndicator"
+            class="hidden ml-2 h-3 w-3 bg-green-500 rounded-full pulse-dot"
+          ></span>
         </div>
-        <span id="nowPlayingTags" class="text-neutral-400 text-xs truncate max-w-sm" title="">Pick a station to play</span>
+        <span
+          id="nowPlayingTags"
+          class="text-neutral-400 text-xs truncate max-w-sm"
+          title=""
+          >Pick a station to play</span
+        >
       </div>
       <div class="flex items-center gap-5 ml-6">
-        <button id="playPauseBtn" class="text-white hover:text-green-400 p-0.5 rounded-full focus:outline-none">
-          <svg id="playPauseIcon" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-10 w-10">
+        <button
+          id="playPauseBtn"
+          class="text-white hover:text-green-400 p-0.5 rounded-full focus:outline-none"
+        >
+          <svg
+            id="playPauseIcon"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
+            viewBox="0 0 24 24"
+            class="h-10 w-10"
+          >
             <path d="M6 4l12 8-12 8V4z" />
           </svg>
         </button>
-        <input id="volumeSlider" type="range" min="0" max="1" step="0.01" value="1" class="w-20 md:w-24 accent-green-500 rounded bg-neutral-700 h-1" />
+        <input
+          id="volumeSlider"
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value="1"
+          class="w-20 md:w-24 accent-green-500 rounded bg-neutral-700 h-1"
+        />
         <audio id="audioPlayer" hidden crossorigin="anonymous"></audio>
       </div>
     </footer>
 
-        <!-- Bottom Navigation: mobile only -->
-    <nav class="fixed bottom-20 left-0 right-0 h-14 bg-neutral-900 border-t border-neutral-800 flex md:hidden justify-around z-40">
-      <button id="mobileHomeTab" class="flex flex-col items-center justify-center flex-1 py-2 text-green-400 font-semibold focus:outline-none">
-        <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+    <!-- Bottom Navigation: mobile only -->
+    <nav
+      class="fixed bottom-20 left-0 right-0 h-14 bg-neutral-900 border-t border-neutral-800 flex md:hidden justify-around z-40"
+    >
+      <button
+        id="mobileHomeTab"
+        class="flex flex-col items-center justify-center flex-1 py-2 text-green-400 font-semibold focus:outline-none"
+      >
+        <svg
+          class="w-6 h-6 mb-1"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
           <path d="M3 12l2-2m0 0l7-7 7 7m-9 2v8m0 0h4m-4 0H7m5 0h2"></path>
         </svg>
         Home
       </button>
-      <button id="mobileFavTab" class="flex flex-col items-center justify-center flex-1 py-2 text-white focus:outline-none">
-        <svg class="w-6 h-6 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+      <button
+        id="mobileFavTab"
+        class="flex flex-col items-center justify-center flex-1 py-2 text-white focus:outline-none"
+      >
+        <svg
+          class="w-6 h-6 mb-1"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+        >
           <path d="M5 21l7-5 7 5V5a2 2 0 00-2-2H7a2 2 0 00-2 2z"></path>
         </svg>
         Favorites
@@ -105,20 +206,34 @@
     <script type="module" src="script.js"></script>
     <script>
       // Mobile nav bar JS: simple tab switcher
-      document.getElementById('mobileHomeTab').onclick = () => {
-        document.getElementById('stationsPanel').classList.remove('hidden');
-        document.getElementById('favoritesPanel').classList.add('hidden');
+      document.getElementById("mobileHomeTab").onclick = () => {
+        document.getElementById("stationsPanel").classList.remove("hidden");
+        document.getElementById("favoritesPanel").classList.add("hidden");
         // update nav highlight
-        document.getElementById('mobileHomeTab').classList.add('text-green-400');
-        document.getElementById('mobileFavTab').classList.remove('text-green-400');
+        document
+          .getElementById("mobileHomeTab")
+          .classList.add("text-green-400");
+        document
+          .getElementById("mobileFavTab")
+          .classList.remove("text-green-400");
       };
-      document.getElementById('mobileFavTab').onclick = () => {
-        document.getElementById('stationsPanel').classList.add('hidden');
-        document.getElementById('favoritesPanel').classList.remove('hidden');
+      document.getElementById("mobileFavTab").onclick = () => {
+        document.getElementById("stationsPanel").classList.add("hidden");
+        document.getElementById("favoritesPanel").classList.remove("hidden");
         // update nav highlight
-        document.getElementById('mobileFavTab').classList.add('text-green-400');
-        document.getElementById('mobileHomeTab').classList.remove('text-green-400');
+        document.getElementById("mobileFavTab").classList.add("text-green-400");
+        document
+          .getElementById("mobileHomeTab")
+          .classList.remove("text-green-400");
       };
+    </script>
+    <!-- pwa -->
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker.register("./service-worker.js");
+        });
+      }
     </script>
   </body>
 </html>

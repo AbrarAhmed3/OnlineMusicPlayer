@@ -140,6 +140,19 @@ nav.fixed {
   /* Make sure list content doesn't hide under fixed bars */
   section {
     padding-bottom: 140px !important; /* 80px + 56px = 136px, a little extra just in case */
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+  
+  }
+}
+
+@media (max-width:1440px){
+  section {
+    padding-bottom: 140px !important; /* 80px + 56px = 136px, a little extra just in case */
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
   }
 }
 

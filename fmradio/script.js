@@ -260,3 +260,11 @@
       fetchStations();
       updateFavoritesPanel();
       updateAllHearts();
+
+
+      // Google Analytics
+      gtag('event', 'add_to_favorites', {
+  event_category: 'Station',
+  event_label: station.name,
+  value: 1
+});
